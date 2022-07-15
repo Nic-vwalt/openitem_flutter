@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openitem_flutter/constants/global_variables.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -10,35 +11,12 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     //return a custom elevated button with a text and a leading icon
     return Center(
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Theme.of(context).colorScheme.primary.withOpacity(0.5);
-            }
-            return null;
-          }),
-        ),
+      child: FloatingActionButton.extended(
+        backgroundColor: GlobalVariables.secondaryColor,
         onPressed: onTap,
-        child: Row(
-          children: [
-            const Icon(Icons.logout,
-            color: Colors.white,),
-            const SizedBox(
-              width: 30,
-            ),
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-              ),
-              
-            ),
-          ],
-        ),
+        label: Text(text, style: const TextStyle(color: Colors.white,),),
+        icon: const Icon(Icons.logout,
+        color: Colors.white,),
       ),
     );
   }

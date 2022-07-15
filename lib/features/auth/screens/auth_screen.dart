@@ -223,7 +223,7 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
           leading: Radio(
-            activeColor: GlobalVariables.triadicSecond,
+            activeColor: Colors.white,
             value: val,
             groupValue: _auth,
             onChanged: (Auth? val) {

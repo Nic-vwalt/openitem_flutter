@@ -17,6 +17,7 @@ class GlobalVariables {
   static const backgroundColor = Color(0xFF004782);
   static const triadicFirst = Color(0xFF7C0082);
   static const triadicSecond = Color(0xFF827C00);
+  static const logoColor = Color(0xFF69b6d4);
   //static const backgroundColor = Color(0xFF827C00);
   //static const secondaryColor = Color(0xFF004782);
   static const complementary = Color(0xFF820006);

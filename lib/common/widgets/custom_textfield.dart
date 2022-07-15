@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         
-        fillColor: GlobalVariables.backgroundColor, filled: true,
+        fillColor: Color.fromARGB(255, 0, 56, 102), filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.white,

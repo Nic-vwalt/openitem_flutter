@@ -25,7 +25,7 @@ class OpenitemLogo extends StatelessWidget {
             ),
           ],
           border: Border.all(
-            color: Colors.grey,
+            color: GlobalVariables.backgroundColor,
             width: 2,
           ),
           image: const DecorationImage(
