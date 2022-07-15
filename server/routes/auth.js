@@ -33,11 +33,9 @@ authRouter.post("/api/signup", async (req, res) => {
 authRouter.post("/api/signin", async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email, password });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ msg: "User with same email already exists!" });
+      return res.status(200).json({ msg: "Logged in Successfully!" });
     }
 
     const hashedsPassword = await bcryptjs.hash(password, 8);

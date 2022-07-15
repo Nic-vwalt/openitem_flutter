@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
-
+  //auth service
   final AuthService authService = AuthService();
 
   //dispose method
@@ -52,6 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
         email: _emailController.text,
         password: _passwordController.text);
   }
+
   void signUpUser() {
     authService.signUpUser(
         context: context,
@@ -75,8 +76,14 @@ class _AuthScreenState extends State<AuthScreen> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    customRadioTile('Sign in', Auth.signin,),
-                    customRadioTile('Sign up', Auth.signup,),
+                    customRadioTile(
+                      'Sign in',
+                      Auth.signin,
+                    ),
+                    customRadioTile(
+                      'Sign up',
+                      Auth.signup,
+                    ),
                   ],
                 ),
                 if (_auth == Auth.signin)
@@ -91,11 +98,15 @@ class _AuthScreenState extends State<AuthScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(controller: _emailController, hintText: 'Email'),
+                              child: CustomTextField(
+                                  controller: _emailController,
+                                  hintText: 'Email'),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(controller: _passwordController, hintText: 'Password'),
+                              child: CustomTextField(
+                                  controller: _passwordController,
+                                  hintText: 'Password'),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -103,7 +114,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                 child: CustomButton(
                                   text: 'Sign In',
                                   onTap: () {
-                                    if (_signInFormKey.currentState!.validate()) {
+                                    if (_signInFormKey.currentState!
+                                        .validate()) {
                                       signInUser();
                                     }
                                   },
@@ -127,29 +139,38 @@ class _AuthScreenState extends State<AuthScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(controller: _emailController, hintText: 'Email'),
+                              child: CustomTextField(
+                                  controller: _emailController,
+                                  hintText: 'Email'),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(controller: _passwordController, hintText: 'Password'),
+                              child: CustomTextField(
+                                  controller: _passwordController,
+                                  hintText: 'Password'),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(controller: _nameController, hintText: 'Name'),
+                              child: CustomTextField(
+                                  controller: _nameController,
+                                  hintText: 'Name'),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(controller: _phoneController, hintText: 'Phone'),
+                              child: CustomTextField(
+                                  controller: _phoneController,
+                                  hintText: 'Phone'),
                             ),
-                            
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
                                 child: CustomButton(
                                   text: 'Sign Up',
                                   onTap: () {
-                                    if (_signUpFormKey.currentState!.validate()) {
+                                    if (_signUpFormKey.currentState!
+                                        .validate()) {
                                       signUpUser();
+                                      _auth = Auth.signin;
                                     }
                                   },
                                 ),
@@ -170,7 +191,10 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Padding customRadioTile(String text, Auth val,) {
+  Padding customRadioTile(
+    String text,
+    Auth val,
+  ) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: SizedBox(
@@ -184,10 +208,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
           tileColor: const Color.fromARGB(255, 0, 0, 0),
-          onTap: () {
-              setState(() {
-                _auth = val;
-              });
+          onTap: () {   
+            setState(() {
+              _auth = val;
+            });
           },
           title: Text(
             text,
