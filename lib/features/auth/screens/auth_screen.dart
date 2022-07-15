@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:openitem_flutter/common/widgets/custom_logo.dart';
+import 'package:openitem_flutter/common/widgets/custom_static_bottomnavbar.dart';
+import 'package:openitem_flutter/common/widgets/custom_textfield.dart';
 import 'package:openitem_flutter/constants/global_variables.dart';
 import 'package:openitem_flutter/features/auth/services/auth_service.dart';
 
@@ -17,12 +20,19 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  //init
   Auth _auth = Auth.signin;
+
+  //form keys
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+
+  //controllers
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
 
   final AuthService authService = AuthService();
 
@@ -33,228 +43,169 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _phoneController.dispose();
   }
 
   void signInUser() {
-    authService.signInUser(context: context, email: _emailController.text, password: _passwordController.text);
+    authService.signInUser(
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text);
+  }
+  void signUpUser() {
+    authService.signUpUser(
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text,
+        name: _nameController.text,
+        phone: _phoneController.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalVariables.backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 10,
-                        offset: Offset(0, 10),
-                      ),
-                    ],
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 2,
-                    ),
-                    image: const DecorationImage(
-                      image: AssetImage('lib/assets/images/OpenItemLogo.png'),
-                      fit: BoxFit.fitHeight,
-                      colorFilter:
-                          ColorFilter.mode(Colors.black, BlendMode.screen),
-                      opacity: 1,
-                    ),
-                  ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const OpenitemLogo(),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    customRadioTile('Sign in', Auth.signin,),
+                    customRadioTile('Sign up', Auth.signup,),
+                  ],
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    width: 180,
-                    child: ListTile(
-                      title: const Text(
-                        'Sign In',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          fontFamily: 'OpenSans',
-                        ),
-                      ),
-                      leading: Radio(
-                        activeColor: GlobalVariables.secondaryColor,
-                        value: Auth.signin,
-                        groupValue: _auth,
-                        onChanged: (Auth? val) {
-                          setState(() {
-                            _auth = val!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 180,
-                    child: ListTile(
-                      title: const Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          fontFamily: 'OpenSans',
-                        ),
-                      ),
-                      leading: Radio(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        activeColor: GlobalVariables.secondaryColor,
-                        value: Auth.signup,
-                        groupValue: _auth,
-                        onChanged: (Auth? val) {
-                          setState(() {
-                            _auth = val!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              if (_auth == Auth.signin)
-                //a form with a username and password input field
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    width: 200,
-                    child: Form(
-                      key: _signInFormKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: _emailController,
-                            decoration: const InputDecoration(
-                              labelText: 'Email',
+                if (_auth == Auth.signin)
+                  //a form with a username and password input field
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      width: 300,
+                      child: Form(
+                        key: _signInFormKey,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomTextField(controller: _emailController, hintText: 'Email'),
                             ),
-                            validator: (String? value) {
-                              if (value != null) {
-                                return 'Please enter a username';
-                              }
-                              return null;
-                            },
-                          ),
-                          TextFormField(
-                            controller: _passwordController,
-                            decoration: const InputDecoration(
-                              labelText: 'Password',
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomTextField(controller: _passwordController, hintText: 'Password'),
                             ),
-                            validator: (String? value) {
-                              if (value != null) {
-                                return 'Please enter a password';
-                              }
-                              return null;
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              child: CustomButton(
-                                text: 'Sign In',
-                                onTap: () {
-                                  if(_signInFormKey.currentState!.validate()) {
-                                    signInUser();
-                                  }
-                                },
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                child: CustomButton(
+                                  text: 'Sign In',
+                                  onTap: () {
+                                    if (_signInFormKey.currentState!.validate()) {
+                                      signInUser();
+                                    }
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              if (_auth == Auth.signup)
-                //a user registration form with input fields for username, password, email, and name
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 200,
-                    child: Form(
-                      key: _signUpFormKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Email',
+                if (_auth == Auth.signup)
+                  //a user registration form with input fields for username, password, email, and name
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 300,
+                      child: Form(
+                        key: _signUpFormKey,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomTextField(controller: _emailController, hintText: 'Email'),
                             ),
-                            validator: (String? value) {
-                              if (value != null) {
-                                return 'Please enter a username';
-                              }
-                              return null;
-                            },
-                          ),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Password',
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomTextField(controller: _passwordController, hintText: 'Password'),
                             ),
-                            validator: (String? value) {
-                              if (value != null) {
-                                return 'Please enter a password';
-                              }
-                              return null;
-                            },
-                          ),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Surname',
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomTextField(controller: _nameController, hintText: 'Name'),
                             ),
-                            validator: (String? value) {
-                              if (value != null) {
-                                return 'Please enter an email';
-                              }
-                              return null;
-                            },
-                          ),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'Name',
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomTextField(controller: _phoneController, hintText: 'Phone'),
                             ),
-                            validator: (String? value) {
-                              if (value != null) {
-                                return 'Please enter a name';
-                              }
-                              return null;
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              child: CustomButton(
-                                text: 'Sign Up',
-                                onTap: () {
-                                  if (_signUpFormKey.currentState!.validate()) {
-                                    signInUser();
-                                  }
-                                },
+                            
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                child: CustomButton(
+                                  text: 'Sign Up',
+                                  onTap: () {
+                                    if (_signUpFormKey.currentState!.validate()) {
+                                      signUpUser();
+                                    }
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
+          ),
+        ),
+      ),
+      //bottomsheet with a image and a text
+      bottomNavigationBar: const BottomNavbarLogo(),
+    );
+  }
+
+  Padding customRadioTile(String text, Auth val,) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SizedBox(
+        width: 180,
+        child: ListTile(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(
+              color: Color.fromARGB(255, 141, 141, 141),
+              width: 2,
+            ),
+          ),
+          tileColor: const Color.fromARGB(255, 0, 0, 0),
+          onTap: () {
+              setState(() {
+                _auth = val;
+              });
+          },
+          title: Text(
+            text,
+            style: const TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 17,
+              fontFamily: 'OpenSans',
+            ),
+          ),
+          leading: Radio(
+            activeColor: GlobalVariables.secondaryColor,
+            value: val,
+            groupValue: _auth,
+            onChanged: (Auth? val) {
+              setState(() {
+                _auth = val!;
+              });
+            },
           ),
         ),
       ),

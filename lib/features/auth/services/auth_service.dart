@@ -36,4 +36,37 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
+
+  void signUpUser({
+    required BuildContext context,
+    required String email,
+    required String password,
+    required String name,
+    required String phone,
+  }) async {
+    try {
+      User user = User(
+        id: '',
+        name: name,
+        email: email,
+        password: password,
+        address: '',
+        phone: phone,
+        type: 'user',
+        token: '',
+      );
+      http.Response res = await http.post(Uri.parse('$uri/api/signup'),
+          body: user.toJson(),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          }
+        );
+        httpErrorHandle(response: res, context: context, onSuccess: () {
+          showSnackBar(context, 'Signed Up Successfully, Please login with the same credentials');
+        });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
 }
