@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openitem_flutter/constants/global_variables.dart';
 
 class OpenitemLogo extends StatelessWidget {
   const OpenitemLogo({
@@ -14,11 +15,11 @@ class OpenitemLogo extends StatelessWidget {
         height: 70,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(15),
+          color: GlobalVariables.backgroundColor,
+          borderRadius: BorderRadius.circular(0),
           boxShadow: const [
             BoxShadow(
-              color: Colors.black,
+              color: GlobalVariables.backgroundColor,
               blurRadius: 10,
               offset: Offset(0, 10),
             ),
@@ -31,7 +32,7 @@ class OpenitemLogo extends StatelessWidget {
             image: AssetImage('lib/assets/images/OpenItemLogo.png'),
             fit: BoxFit.fitHeight,
             colorFilter:
-                ColorFilter.mode(Colors.black, BlendMode.screen),
+                ColorFilter.mode(GlobalVariables.backgroundColor, BlendMode.screen),
             opacity: 1,
           ),
         ),

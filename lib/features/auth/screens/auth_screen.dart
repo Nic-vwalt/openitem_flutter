@@ -198,16 +198,17 @@ class _AuthScreenState extends State<AuthScreen> {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: SizedBox(
-        width: 180,
+        height: 60,
+        width: 150,
         child: ListTile(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(0),
             side: const BorderSide(
-              color: Color.fromARGB(255, 141, 141, 141),
+              color: GlobalVariables.backgroundColor,
               width: 2,
             ),
           ),
-          tileColor: const Color.fromARGB(255, 0, 0, 0),
+          tileColor: GlobalVariables.backgroundColor,
           onTap: () {   
             setState(() {
               _auth = val;
@@ -217,12 +218,12 @@ class _AuthScreenState extends State<AuthScreen> {
             text,
             style: const TextStyle(
               fontWeight: FontWeight.normal,
-              fontSize: 17,
+              fontSize: 15,
               fontFamily: 'OpenSans',
             ),
           ),
           leading: Radio(
-            activeColor: GlobalVariables.secondaryColor,
+            activeColor: GlobalVariables.triadicSecond,
             value: val,
             groupValue: _auth,
             onChanged: (Auth? val) {

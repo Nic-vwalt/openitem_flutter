@@ -22,7 +22,7 @@ class BottomNavbarLogo extends StatelessWidget {
           ),
         ],
         border: Border.all(
-          color: Colors.grey,
+          color: Colors.black,
           width: 2,
         ),
         image: const DecorationImage(

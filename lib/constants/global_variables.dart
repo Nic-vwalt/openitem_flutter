@@ -12,8 +12,15 @@ class GlobalVariables {
     stops: [0.5, 1.0],
   );
 
-  static const secondaryColor = Color.fromARGB(255, 255, 255, 255);
-  static const backgroundColor = Color.fromARGB(255, 60, 152, 158);
+  static const secondaryColor = Color(0xFF00827C);
+  static const themeColor = Color(0xFF00823B);
+  static const backgroundColor = Color(0xFF004782);
+  static const triadicFirst = Color(0xFF7C0082);
+  static const triadicSecond = Color(0xFF827C00);
+  //static const backgroundColor = Color(0xFF827C00);
+  //static const secondaryColor = Color(0xFF004782);
+  static const complementary = Color(0xFF820006);
+  static const monochromatic = Color(0xFF00B5AD);
   static const Color greyBackgroundCOlor = Color(0xffebecee);
   static var selectedNavBarColor = Colors.cyan[800]!;
   static const unselectedNavBarColor = Colors.black87;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openitem_flutter/constants/global_variables.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -13,10 +14,11 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
-        fillColor: Colors.white,
+        
+        fillColor: GlobalVariables.backgroundColor, filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.black38,
+            color: Colors.white,
           ),
         ),
       ),
