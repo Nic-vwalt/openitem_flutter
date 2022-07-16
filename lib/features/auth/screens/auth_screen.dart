@@ -199,7 +199,7 @@ class _AuthScreenState extends State<AuthScreen> {
       padding: const EdgeInsets.all(4.0),
       child: SizedBox(
         height: 60,
-        width: 150,
+        width: 160,
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0),
