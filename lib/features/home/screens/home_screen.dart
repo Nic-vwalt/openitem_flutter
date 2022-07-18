@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openitem_flutter/constants/global_variables.dart';
+import 'package:openitem_flutter/features/visitor/screens/visitor_screen.dart';
 
 import '../../auth/screens/auth_screen.dart';
 
@@ -27,10 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
     Column(
-      children: const [
-        Text(
-          'Index 0: Home',
-          style: optionStyle,
+      children: [
+        ListTile(
+          leading: const Icon(Icons.home),
+          title: const Text('Visitor Workflow'),
+          subtitle: const Text('Tap here to start'),
+          onTap: () {
+            Navigator.pushNamed(context, VisitorScreen.routeName);
+          },
         ),
       ],
     ),
@@ -44,24 +48,26 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Column(
       children: [
+        const Text(
+          'Click here to Logout',
+          style: optionStyle,
+        ),
         //floating action button to the auth screen
         FloatingActionButton(
           backgroundColor: Colors.white,
+          
           onPressed: () {
             Navigator.pushNamed(context, AuthScreen.routeName);
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.logout),
         ),
-        const Text(
-          'Index 0: Logout',
-          style: optionStyle,
-        ),
+
       ],
     ),
   ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Center(child: Text('Home')),
       ),
       body: Center(
         child: Padding(
@@ -69,45 +75,45 @@ class _HomeScreenState extends State<HomeScreen> {
           child: widgetOptions.elementAt(_selectedIndex),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: GlobalVariables.secondaryColor,
-              ),
-              child: Text('OpenItem'),
-            ),
-            SizedBox(
-              width: 10,
-              child: ListTile(
-                title: const Text('Home'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            SizedBox(
-              width: 10,
-              child: ListTile(
-                title: const Text('Settings'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            SizedBox(
-              width: 10,
-              child: ListTile(
-                title: const Text('About'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: GlobalVariables.secondaryColor,
+      //         ),
+      //         child: Text('OpenItem'),
+      //       ),
+      //       SizedBox(
+      //         width: 10,
+      //         child: ListTile(
+      //           title: const Text('Home'),
+      //           onTap: () {
+      //             Navigator.pop(context);
+      //           },
+      //         ),
+      //       ),
+      //       SizedBox(
+      //         width: 10,
+      //         child: ListTile(
+      //           title: const Text('Settings'),
+      //           onTap: () {
+      //             Navigator.pop(context);
+      //           },
+      //         ),
+      //       ),
+      //       SizedBox(
+      //         width: 10,
+      //         child: ListTile(
+      //           title: const Text('About'),
+      //           onTap: () {
+      //             Navigator.pop(context);
+      //           },
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,

@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
           appBarTheme: const AppBarTheme(
               elevation: 0,
               iconTheme: IconThemeData(
-                color: Colors.black,
+                color: GlobalVariables.monochromatic,
               ))),
     );
   }
