@@ -5,7 +5,8 @@ import 'package:openitem_flutter/models/hive/question_list.dart';
 import 'package:openitem_flutter/models/hive/visitor.dart';
 import 'package:path_provider/path_provider.dart';
 
-void saveVisitor({
+class VisitorService{
+  void saveVisitor({
     required BuildContext context,
     required String id,
     required String name,
@@ -31,9 +32,9 @@ void saveVisitor({
     await box.put(id, visitor);
 
     print(box.get(id));
-}
+  }
 
-void saveQuestions({
+  void saveQuestions({
     required BuildContext context,
     required String id,
     required String visitorId,
@@ -57,4 +58,7 @@ void saveQuestions({
     await box.put(id, ql);
 
     print(box.get(id));
+  }
+
 }
+
